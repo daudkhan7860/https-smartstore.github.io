@@ -1,0 +1,7 @@
+<div class="app-card" data-category="social">
+  <img src="https://i.imgur.com/1QeQd6L.png" alt="SmartGram">
+  <h3>SmartGram</h3>
+  <a href="SmartGram.apk" target="_blank">
+    <button class="download-btn">Download</button>
+  </a>
+</div>
