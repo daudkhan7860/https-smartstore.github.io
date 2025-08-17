@@ -8,71 +8,146 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #000; /* Black background */
+      background: #111;
       color: #fff;
-      text-align: center;
     }
     header {
-      background: #b30000; /* Red header */
-      padding: 20px;
-      font-size: 24px;
+      background: #e50914;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.8em;
       font-weight: bold;
     }
-    .container {
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      padding: 15px;
+      background: #222;
+    }
+    .search-bar input {
+      width: 80%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      background: #181818;
+      padding: 10px;
+    }
+    .filters button {
+      background: #e50914;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+    }
+    .filters button:hover {
+      background: #b20710;
+    }
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
       padding: 20px;
     }
-    .card {
-      background: #111;
-      border: 1px solid #b30000;
+    .app-card {
+      background: #222;
       border-radius: 10px;
       padding: 15px;
-      margin: 15px auto;
-      width: 90%;
-      max-width: 300px;
+      text-align: center;
+      transition: transform 0.2s;
     }
-    .card h2 {
-      margin: 0;
-      color: #b30000;
+    .app-card:hover {
+      transform: scale(1.05);
     }
-    .btn {
+    .app-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
+    .app-card h3 {
+      margin: 10px 0;
+      font-size: 1.1em;
+    }
+    .download-btn {
       display: inline-block;
       margin-top: 10px;
-      padding: 10px 15px;
-      background: #b30000;
-      color: white;
+      padding: 8px 12px;
+      background: #e50914;
+      color: #fff;
+      border: none;
       border-radius: 5px;
-      text-decoration: none;
+      cursor: pointer;
     }
-    footer {
-      background: #222;
-      padding: 10px;
-      margin-top: 20px;
+    .download-btn:hover {
+      background: #b20710;
     }
   </style>
 </head>
 <body>
-  <header>
-    🚀 SmartStore
-  </header>
+  <header>🚀 SmartStore</header>
 
-  <div class="container">
-    <h1>Welcome to SmartStore</h1>
-    <p>Your own app store - Free & Simple</p>
+  <div class="search-bar">
+    <input type="text" id="search" placeholder="Search apps...">
+  </div>
 
-    <div class="card">
-      <h2>SmartGram</h2>
-      <p>Village Social Media App</p>
-      <a href="#" class="btn">Download</a>
+  <div class="filters">
+    <button onclick="filterApps('all')">All</button>
+    <button onclick="filterApps('games')">Games</button>
+    <button onclick="filterApps('tools')">Tools</button>
+    <button onclick="filterApps('social')">Social</button>
+  </div>
+
+  <div class="app-grid" id="appGrid">
+    <!-- Example Apps -->
+    <div class="app-card" data-category="games">
+      <img src="https://img.icons8.com/color/96/controller.png" alt="Game">
+      <h3>Super Game</h3>
+      <button class="download-btn">Download</button>
     </div>
-
-    <div class="card">
-      <h2>Coming Soon</h2>
-      <p>More apps will be added here.</p>
+    <div class="app-card" data-category="tools">
+      <img src="https://img.icons8.com/color/96/settings.png" alt="Tool">
+      <h3>Smart Tool</h3>
+      <button class="download-btn">Download</button>
+    </div>
+    <div class="app-card" data-category="social">
+      <img src="https://img.icons8.com/color/96/chat.png" alt="Social">
+      <h3>Chat App</h3>
+      <button class="download-btn">Download</button>
+    </div>
+    <div class="app-card" data-category="games">
+      <img src="https://img.icons8.com/color/96/joystick.png" alt="Game">
+      <h3>Adventure Game</h3>
+      <button class="download-btn">Download</button>
     </div>
   </div>
 
-  <footer>
-    Made with ❤️ by Daud
-  </footer>
+  <script>
+    const searchInput = document.getElementById("search");
+    const appCards = document.querySelectorAll(".app-card");
+
+    searchInput.addEventListener("input", () => {
+      const value = searchInput.value.toLowerCase();
+      appCards.forEach(card => {
+        card.style.display = card.innerText.toLowerCase().includes(value) ? "block" : "none";
+      });
+    });
+
+    function filterApps(category) {
+      appCards.forEach(card => {
+        if (category === "all" || card.dataset.category === category) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+  </script>
 </body>
 </html>
